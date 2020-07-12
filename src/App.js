@@ -66,24 +66,12 @@ class App extends Component {
 const Tiles = (props) => {
     const tiles = props.array.map((item, index) => {
       let classname = '';
-      switch(index){
-        case props.emptyIndex:
-          classname = "empty";
-          break;
-        case props.emptyIndex - 1:
-          classname = "active tile";
-          break;
-        case props.emptyIndex + 1:
-          classname = "active tile";
-          break;
-        case props.emptyIndex + props.grid:
-          classname = "active tile";
-          break;
-        case props.emptyIndex - props.grid:
-          classname = "active tile";
-          break;
-        default:
-          classname = "tile"
+      if (index === props.emptyIndex) {
+        classname = 'empty';
+      } else if(index === props.emptyIndex - 1 || index === props.emptyIndex + 1 || index === props.emptyIndex + props.grid || index === props.emptyIndex - props.grid) {
+        classname = 'active tile';
+      } else {
+        classname = 'tile';
       }
       return <li className={classname} key={item.toString()} data-index={index} id={'item_' + item.toString()} onClick={props.onclick}>{item}</li>
     })
